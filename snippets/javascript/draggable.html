@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+	<head>
+
+		<title>Dragging an object with the mouse</title>
+
+		<style>
+			.draggable {
+				position: absolute;
+			}
+
+			#my-object {
+				width: 50px;
+				height: 50px;
+				background: green;
+				top: 100px;
+				left: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Dragging an object with the mouse</h1>
+		
+		<div id='my-object' class='draggable'></div>
+
+		<script>
+				function makeDraggable(object) {
+
+					/*
+						Define a named function corresponding to what we want to happen on each mouse state:
+							- on mousedown, start dragging the object
+							- on each mousemove, update the object's position
+							- on mouseup, stop dragging the object
+					*/
+
+					function startDrag(event) {
+						/*
+							Attach the mousemove/mouseup events to the whole document;
+							otherwise if the user moves the mouse faster than then object can follow,
+							the object gets left behind.
+
+							Similarly, the mouseup event can happen outside the object.
+						*/
+						document.addEventListener('mousemove', doDrag, false);
+						document.addEventListener('mouseup', stopDrag, false);
+
+						/*
+							Prevent the default click & drag browser behavior.
+							Otherwise when you move the object across parts of text,
+							the text gets selected.
+						*/
+						event.preventDefault();
+					}
+
+					
+					function doDrag(event) {
+						/* 
+							On each mouse movement, adjust the position of the object being dragged.
+						*/
+						object.style.left = event.clientX + 'px';
+						object.style.top = event.clientY + 'px';
+					}
+					
+					function stopDrag(event) {
+
+						/*
+							Detach the mousemove/mouseup listeners. 
+							We do this first to make sure no previous code can throw an error
+							and leave the listeners hanging.
+						*/
+						document.removeEventListener('mousemove', doDrag, false);
+						document.removeEventListener('mouseup', stopDrag, false);
+					
+						/* Do other things, as needed */
+					}
+
+					object.addEventListener('mousedown', startDrag, false);
+				}
+
+				var element = document.getElementById('my-object');
+				makeDraggable(element);
+		</script>
+
+	</body>
+</html>
