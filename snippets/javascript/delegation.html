@@ -14,12 +14,6 @@
 				background: #cca;
 				margin: 1em 0;
 			}
-
-			.item span {
-				background: #330;
-				color: #fff;
-				padding: 0.5em;
-			}
 		</style>
 	</head>
 	<body>
@@ -27,29 +21,53 @@
 		<p>Click on any item.</p>
 		<ul id='parent'>
 			<li class='item'>
-				<span>✓</span> Water the flowers
+				<h2>Ann</h2>
+				<p>b. 01/01/1977</p>
 			</li>
 			<li class='item'>
-				<span>✗</span> Walk the dog
+				<h2>Beatrix</h2>
+				<p>b. 01/01/1977</p>
 			</li>
 			<li class='item'>
-				<span>✗</span> Read the news
+				<h2>Carl</h2>
+				<p>b. 01/01/1977</p>
 			</li>
 			<li class='item'>
-				<span>✓</span> Meditate for 10 minutes
+				<h2>Daniel</h2>
+				<p>b. 01/01/1977</p>
 			</li>
 		</ul>
 		<script>
+			function delegate(parent, eventName, itemClass, handler) {
+
+				function isItem(element) {
+					return element.classList.contains(itemClass);
+				}
+
+				parent.addEventListener(eventName, function(event) {
+					// the element that was clicked
+					var target = event.target;
+
+					// the element on which we attached the `click` event
+					var parent = this;
+
+					// bubble up the DOM tree until we find our item or reach the root (the parent node)
+					while (target !== parent && !isItem(target)) {
+						target = target.parentNode;
+					}
+
+					// if we haven't reached the parent node it means we found an item
+					if (target !== parent) {
+						handler(event, target);
+					}
+				});
+			}
+		</script>
+
+		<script>
 			var parent = document.getElementById('parent');
-			parent.addEventListener('click', function(e) {
-				var target = e.target, parent = this;
-				while (target !== parent && !target.classList.contains('item')) {
-					target = target.parentNode;
-				}
-				if (target !== parent) {
-					// we have a match!
-					alert(target.textContent);
-				}
+			delegate(parent, 'click', 'item', function(event, target) {
+				alert("You've clicked on: " + target.textContent);
 			});
 		</script>
 	</body>
