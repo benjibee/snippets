@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+	<title>Responsive thumbnail gallery with labels</title>
+
+	<style type="text/css">
+
+	.gallery {
+		list-style: none;
+		padding: 0;
+		border: 1px solid #000;
+		overflow: hidden;
+	}
+
+	.gallery li {
+		float: left;
+		height: 0;
+		position: relative;
+		width: 100%;
+		padding-bottom: 100%;
+		border-bottom: 1px solid #000;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+	}
+
+	.gallery li span {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 0.5em 1em;
+		text-align: center;
+	}
+
+	.gallery li img {
+		transform: translate(-50%,-50%) scale(0.5, 0.5);
+		-moz-transform: translate(-50%,-50%) scale(0.5, 0.5);
+		-webkit-transform: translate(-50%,-50%) scale(0.5, 0.5);
+		position: absolute;
+		max-width: 180%;
+		max-height: 120%;
+		top: 50%;
+		left: 50%;
+	}
+
+	.gallery-2 li {
+		width: 50%;
+		padding-bottom: 50%;
+	}
+
+	.gallery-2 li:nth-child(2n+1) {
+		border-right: 1px solid #000;
+	}
+
+	.gallery-3 li {
+		width: 33.33%;
+		padding-bottom: 33.33%;
+	}
+
+	.gallery-3 li:nth-child(3n+1),
+	.gallery-3 li:nth-child(3n+2) {
+		border-right: 1px solid #000;
+	}
+
+
+	</style>
+</head>
+<body>
+
+
+	<ul class='gallery gallery-3'>
+		<li>
+			<img src='http://placehold.it/200x300'/>
+			<span>Artificially-enhanced apples</span>
+		</li>
+		<li>
+			<img src='http://placehold.it/350x150'/>
+			<span>Slightly deformed pears</span>
+		</li>
+		<li>
+			<img src='http://placehold.it/350x150'/>
+			<span>V.v.v.v.v. sweet grapes</span>
+		</li>
+		<li>
+			<img src='http://placehold.it/350x150'/>
+			<span>Turned-down turnips</span>
+		</li>
+		<li>
+			<img src='http://placehold.it/800x200'/>
+			<span>Improbably large plums</span>
+		</li>
+		<li>
+			<img src='http://placehold.it/350x150'/>
+			<span>Conjoined carrots</span>
+		</li>
+		<li>
+			<img src='http://placehold.it/600x600'/>
+			<span>Infinitesimal chickpeas</span>
+		</li>
+		<li>
+			<img src='http://placehold.it/300x1200'/>
+			<span>Short-haired coconuts</span>
+		</li>
+	</ul>
+
+</body>
+</html>
