@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>Scroll Waypoints</title>
+
+		<style>
+
+			body {
+				text-align: center;
+			}
+
+			/*
+				These are our circles, spaced out vertically with 20% (of page width) margin.
+			*/
+			.waypoint {
+				width: 10em;
+				height: 10em;
+				background: grey;
+				margin: 20% auto;
+				transition: transform 0.2s, background-color 0.2s;
+				border-radius: 50%;
+			}
+
+			/*
+				When a circle is hit, make it green and slightly bigger
+			*/
+			.waypoint-hit {
+				background: green;
+				transform: scale(1.2);
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Scroll Waypoints</h1>
+
+		<p>
+			Keep scrolling to see the circles light up. 
+			<a href='http://www.html5rocks.com/en/tutorials/speed/animations/'>Read more here</a>
+		</p>
+
+		<!-- 
+			to make this example shorter, let's have a single waypoint 
+			and clone it A THOUSAND TIMES from JavaScript (the setup() function)
+		-->
+		<div class='waypoint'></div>
+
+		<script type='text/javascript'>
+
+			// run this function immediately
+			(function setup() {
+				// Create LOTS of waypoints from the initial one
+				var JUST_HOW_MANY_WAYPOINTS = 1000;
+				var initial_waypoint = document.querySelector('.waypoint');
+				for (var i = 0; i < JUST_HOW_MANY_WAYPOINTS; i++) {
+					var new_waypoint = initial_waypoint.cloneNode(true);
+					initial_waypoint.parentNode.insertBefore(new_waypoint, initial_waypoint);
+				}	
+			})();
+
+			// cache all the DOM elements corresponding to waypoints, these never change
+			var waypoint_elements = document.querySelectorAll('.waypoint');
+
+			// here we'll keep our waypoints along with their top offset (which sometimes can change)
+			// and their hit state (which changes constantly)
+			var waypoints = [];
+
+			// set up some initial values
+			for (var i = 0; i < waypoint_elements.length; i++) {
+				waypoints.push({
+					element: waypoint_elements[i],
+					top: 0,
+					hit: false
+				})
+			}
+
+			// update the top offset of our waypoints
+			function updateWaypoints() {
+				// we're going to match each waypoint's bounding box 
+				// against the document's bounding box, but it stays the same
+				// so let's save it way up here.
+				var parent_bbox = document.documentElement.getBoundingClientRect();
+				waypoints.forEach(function(waypoint) {
+					// read the bounding box for each element, and save it for later
+					var bbox = waypoint.element.getBoundingClientRect();
+					waypoint.top = bbox.top - parent_bbox.top;
+					waypoint.hit = false;
+				});
+
+				// finally, let's make sure we hit-test the newly updated waypoints.
+				updateCurrentPosition();
+			};
+
+			// this is the current scroll position
+			var current_position = 0;
+
+
+			// to make sure we're not hit-testing the waypoints too often,
+			// let's do it once per animation frame with the help of a 'ticker'
+			// and requestAnimationFrame.
+			var ticking = false;
+			function tick() {
+				if (!ticking) {
+					ticking = true;
+					window.requestAnimationFrame(hitWaypoints);
+				}
+			}
+
+			// hit-test all the waypoints
+			function hitWaypoints() {
+				waypoints.forEach(function(item) {
+					// a waypoint should be hit if it's at 100px at most from the top of the screen
+					var is_hit = Math.abs(item.top - current_position) < 100;
+
+					// to make sure we don't update waypoints unnecessarily,
+					// first check if the waypoint's state has _actually_ changed.
+					if (item.hit !== is_hit) {
+						// in case it had, toggle the 'hit' CSS class based on our boolean flag...
+						item.element.classList.toggle('waypoint-hit', is_hit);
+						// ...then save that flag for later checks
+						item.hit = is_hit;
+					}
+				});
+				// to make sure we free up the ticker for a new tick:
+				ticking = false;
+			}
+
+			// store the scroll position, then ask for a new tick
+			function updateCurrentPosition() {
+				current_position = window.scrollY;
+				tick();
+			}
+
+			// Hook it all up:
+			// when resizing the window, recompute the positions of each waypoint
+			// when scrolling the window, update the position and request a waypoint hit-test.
+			window.addEventListener('resize', updateWaypoints);
+			window.addEventListener('scroll', updateCurrentPosition);
+
+
+			// To make sure things look okay regardless of the initial scroll 
+			// e.g. when refreshing the page, it will be already scrolled to the position before the refresh
+			// let's run an initial update
+			updateWaypoints();
+		</script>
+	</body>
+</html>
