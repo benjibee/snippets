@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>SVG Drop Shadows</title>
+
+	<style type="text/css">
+
+		/* 
+			Position the SVG at the center of the screen.
+			Also put a border on it to make it clear what its bounds are.
+		*/
+		svg {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			border: 1px solid fuchsia;
+		}
+	</style>
+</head>
+<body>
+
+	<!-- 
+		It's important to have overflow:visible on the SVG element
+		because it's possible that the drop shadow bleeds outside
+		the bounds of the SVG.
+	-->
+	<svg width='500' height='300' style='overflow:visible'>
+		<!-- filters are defined in the <defs> section of the SVG -->
+		<defs>
+
+			<!--
+				This is our definition for the drop shadow filter.
+				We give it an ID so that it can be referenced 
+				(and applied on) multiple objects.
+
+				The `x`, `y`, `width` and `height` attributes
+				control the area our filter can be rendered onto.
+
+				Since the drop shadow can potentially be pointed at a large distance 
+				in any direction, we're giving it extra legroom by leaving 
+				50% in each direction. (These are all defined proportionally to the object).
+			-->
+			<filter id='dropshadow-filter' x='-50%' y='-50%' width='200%' height='200%'>
+
+				<!--
+					1. The first primitive is a Gaussian blur:
+						- it takes as an input the original graphic
+						  (we only need the alpha channel, thus in='SourceAlpha')
+						- it blurs the input by a factor of 10 (stdDeviation)
+						- it outputs its result as `blur`
+				-->
+				<feGaussianBlur stdDeviation="10" in='SourceAlpha' result='blur'/>
+				
+				<!--
+					2. Next, we use the feOffset primitive
+					to take the output from `blur` and offset it by 10,10.
+					The output is called `offset_blur`.
+
+					BTW, if you wanted to have your drop shadow defined as a single
+					distance + direction of light (expressed in degrees), then you'd 
+					have to set:
+						- dx = distance * Math.sin(degrees * Math.PI / 180)
+						- dy = distance * Math.cos(degrees * Math.PI / 180)
+				-->
+				<feOffset dx="10" dy="10" in='blur' result='offset_blur'/>
+				
+				<!--
+					3. On the other hand, we want our drop shadow to have 
+					a specific color and opacity, for which we use a feFlood primitive.
+					The result is called `flood`.
+				-->
+				<feFlood flood-color="#000" flood-opacity="0.75" result='flood'/>
+
+				<!--
+					4. We combine the `offset_blur` (Step 2) and `flood` (Step 3)
+					into our final effect, called `drop_shadow`.
+				-->
+				<feComposite operator="in" in='flood' in2="offset_blur" result='drop_shadow'/>
+				
+				<!--
+					5. Finally, we need to display both our original object
+					and its drop shadow, so we use feMerge to combine the two.
+					First is `drop_shadow` (because we want it underneath),
+					and then the `SourceGraphic` on top.
+				-->
+				<feMerge>
+		            <feMergeNode in='drop_shadow' />
+		            <feMergeNode in='SourceGraphic' />
+		        </feMerge>
+			</filter>
+
+		</defs>
+
+		<!-- 
+			We have three objects in our SVG, each referencing the same drop shadow filter
+			Notice filter='url(#dropshadow-filter)' on all three.
+			I've put them at the edges of the SVG to see how the drop shadow bleeds outside
+			the bounds of the SVG.
+		-->
+		<rect x='0' y='0' width='100' height='100' fill='red' filter='url(#dropshadow-filter)'></rect>
+		<rect x='400' y='0' width='100' height='100' fill='blue' filter='url(#dropshadow-filter)'></rect>
+		<circle cx='250' cy='250' r='50' fill='green' filter='url(#dropshadow-filter)'></circle>
+	</svg>
+
+</body>
+</html>
