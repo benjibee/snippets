@@ -20,5 +20,5 @@ Simple HTML, CSS, SVG and JavaScript recipes, thoroughly documented.
 
 ### SVG
 
-* Drop shadow: [code](https://github.com/danburzo/snippets/blob/master/snippets/svg/drop-shadow/drop-shadow.html) &middot; [demo](https://cdn.rawgit.com/danburzo/snippets/blob/master/snippets/svg/drop-shadow/drop-shadow.html)
+* Drop shadow: [code](https://github.com/danburzo/snippets/blob/master/snippets/svg/drop-shadow/drop-shadow.html) &middot; [demo](https://cdn.rawgit.com/danburzo/snippets/master/snippets/svg/drop-shadow/drop-shadow.html)
 * Line animation: coming soon
