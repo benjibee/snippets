@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>List with sticky headers</title>
+
+	<style type="text/css">
+
+		body {
+			line-height: 2;
+		}
+
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		
+		/* The list wrapper */
+		.list-wrapper {
+			border: 1px solid #b0b0b0;
+			
+			/* floating headers will be absolutely positioned relative to this element */
+			position: relative;
+
+			/* it also dictates the size of our list */
+			width: 18em;
+			height: 12em;
+
+			/* and prevents the floating headers from overflowing */
+			overflow: hidden;
+		}
+
+		/* The actual list */
+		.list {
+			
+			/* constrain it to the bounds of its parent... */
+			max-height: 100%;
+
+			/* ... and make sure scrollbars show up when needed */
+			overflow: auto;
+		}
+
+		/* The list headers */ 
+		.list-header {
+			background: #d0d0d0;
+			color: #000;
+			margin: 0;
+			border-bottom: 1px solid #b0b0b0;
+		}
+
+		/* 
+			The floating counterparts inherit 
+			the style of the original headers.
+		*/
+		.list-header.floating {
+
+			/* ... but they're positioned absolutely relative to the list wrapper */
+			position: absolute;
+
+			/* hidden by default */
+			display: none;
+
+			/* take up the whole width */
+			left: 0;
+			right: 0;
+
+			/* ...and stay at the top of the list wrapper */
+			top: 0;
+		}
+
+		/* 
+			When active, the floating headers show up 
+		*/
+		.list-header.floating.active {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+
+	<h1>List with sticky headers</h1>
+
+	<div class='list-wrapper'>
+		<ul class='list'>
+			<li>
+				<h2 class='list-header'>Section 1</h2>
+				<ul>
+					<li>Item 1.1</li>
+					<li>Item 1.2</li>
+					<li>Item 1.3</li>
+					<li>Item 1.4</li>
+					<li>Item 1.5</li>
+					<li>Item 1.6</li>
+					<li>Item 1.7</li>
+				</ul>
+			</li>
+			<li>
+				<h2 class='list-header'>Section 2</h2>
+				<ul>
+					<li>Item 2.1</li>
+					<li>Item 2.2</li>
+					<li>Item 2.3</li>
+					<li>Item 2.4</li>
+					<li>Item 2.5</li>
+					<li>Item 2.6</li>
+					<li>Item 2.7</li>
+					<li>Item 2.8</li>
+				</ul>
+			</li>
+			<li>
+				<h2 class='list-header'>Section 3</h2>
+				<ul>
+					<li>Item 3.1</li>
+					<li>Item 3.2</li>
+					<li>Item 3.3</li>
+					<li>Item 3.4</li>
+					<li>Item 3.5</li>
+					<li>Item 3.6</li>
+					<li>Item 3.7</li>
+					<li>Item 3.8</li>
+					<li>Item 3.9</li>
+					<li>Item 3.10</li>
+				</ul>
+			</li>
+			<li>
+				<h2 class='list-header'>Section 4</h2>
+				<ul>
+					<li>Item 4.1</li>
+					<li>Item 4.2</li>
+					<li>Item 4.3</li>
+					<li>Item 4.4</li>
+					<li>Item 4.5</li>
+					<li>Item 4.6</li>
+					<li>Item 4.7</li>
+					<li>Item 4.8</li>
+					<li>Item 4.9</li>
+					<li>Item 4.10</li>
+					<li>Item 4.11</li>
+					<li>Item 4.12</li>
+					<li>Item 4.13</li>
+					<li>Item 4.14</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+	<script>
+		/*
+			Our StickyHeaders function takes two parameters:
+			- `list` is the DOM element that represents the list
+			- `header_selector` is a CSS selector that matches the headers 
+				we want to make sticky (e.g. `.list-headers`)
+		*/
+		function StickyHeaders(list, header_selector) {
+
+			// read the bounding box of the list element
+			// (we'll need it for later)
+			var list_rect = list.getBoundingClientRect();
+
+			// Query the list for headers
+			// and turn the resulting NodeList into an Array
+			// so we can use array methods on it (e.g. forEach, map, etc.)
+			var header_elements = Array.prototype.slice.call(list.querySelectorAll(header_selector));
+
+			// `headers` will store all the measurements we need for each header
+			var headers = header_elements.map(function(header) {
+
+				// each header will need a 'floating' counterpart that we obtain
+				// by cloning the original header and inserting it in the DOM right before the header.
+				var floating_header = header.cloneNode(true);
+				floating_header.classList.add('floating');
+				header.parentNode.insertBefore(floating_header, header);
+
+				// floating headers are positioned with `position: absolute`, and the nearest
+				// `position: relative` parent is the `.list-wrapper`, so the floating headers
+				// will be visually extracted from the list. 
+
+				// To make sure they don't overlap the list scrollbar, we need to leave a bit of space
+				// to the right. We can figure out how much space the scrollbar needs by looking at 
+				// the bounding boxes for the list element and the header element: the difference in 
+				// the `.right` property is the scrollbar. 
+				floating_header.style.right = (list_rect.right - header.getBoundingClientRect().right) + 'px';
+				
+				// return an object with all the info we need for a header
+				return {
+					// we only need a reference to the floating header from now on
+					element: floating_header,
+					
+					// ...but measure how much down the list the original header was
+					top: header.offsetTop,
+					
+					// ...and take a note of its height
+					height: header.offsetHeight
+				};
+			});
+
+			// on each scroll event on the list, update the sticky headers
+			list.addEventListener('scroll', update);
+
+			function update() {
+
+				// read the current scroll position from the list element
+				var scroll_position = list.scrollTop;
+
+				// go through the list of headers to figure out the first header
+				// that is visible in the list
+				var idx = 0;
+				while (headers[idx] && headers[idx].top < scroll_position) idx++;
+				
+				// the previous header is the one we should be floating
+				var current_header = headers[idx - 1];
+
+				// and, if it exists, we'll need the one after that as well
+				// (you'll see in a second why)
+				var next_header = headers[idx];
+
+				// Hide all floating headers except the current one
+				headers.forEach(function(header, idx) {
+					header.element.classList.toggle('active', header === current_header);
+				});
+
+				if (current_header) {
+
+					// In case there's a header after the current one and it's getting closer,
+					// we'll need to nudge our floating header upwards.
+
+					// The offset is based on the difference between the top of the next header
+					// and the current scroll position, subtracted from our floating header's height.
+					var offset = next_header ? next_header.top - scroll_position - current_header.height : 0;
+					
+					// By doing Math.min we make sure we only apply this offset when it becomes negative.
+					current_header.element.style.top = Math.min(0, offset) + 'px';
+
+				}
+			}
+
+			// run the update initially, since some browsers (e.g. Firefox) will remember the scroll position
+			// of our list between refreshes, and we want to make sure everything is intialized even before
+			// there's any scroll event.
+			update();
+		}
+
+		// Finally, run the StickyHeaders function on our list.
+		StickyHeaders(document.querySelector('.list'), '.list-header');
+	</script>
+</body>
+</html>

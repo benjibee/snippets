@@ -17,6 +17,7 @@ Simple HTML, CSS, SVG and JavaScript recipes, thoroughly documented.
 * Dragging an object with the mouse: [code](https://github.com/danburzo/snippets/blob/master/snippets/javascript/draggable/draggable.html) &middot; [demo](https://cdn.rawgit.com/danburzo/snippets/master/snippets/javascript/draggable/draggable.html)
 * Click inside vs. outside element: [code](https://github.com/danburzo/snippets/blob/master/snippets/javascript/inside-outside/inside-outside.html) &middot; [demo](https://cdn.rawgit.com/danburzo/snippets/master/snippets/javascript/inside-outside/inside-outside.html)
 * Scroll Waypoints: [code](https://github.com/danburzo/snippets/blob/master/snippets/javascript/scroll-waypoints/scroll-waypoints.html) &middot; [demo](https://cdn.rawgit.com/danburzo/snippets/master/snippets/javascript/scroll-waypoints/scroll-waypoints.html)
+* List with sticky headers: [code](https://github.com/danburzo/snippets/blob/master/snippets/javascript/sticky-headers/sticky-headers.html) &middot; [demo](https://cdn.rawgit.com/danburzo/snippets/master/snippets/javascript/sticky-headers/sticky-headers.html)
 
 ### SVG
 
