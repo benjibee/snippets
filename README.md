@@ -1,6 +1,8 @@
 snippets
 ========
 
+## Introduction
+
 Simple HTML, CSS, SVG and JavaScript recipes, thoroughly documented.
 
 ## Table of Contents
@@ -23,3 +25,10 @@ Simple HTML, CSS, SVG and JavaScript recipes, thoroughly documented.
 
 * Drop shadow: [code](https://github.com/danburzo/snippets/blob/master/snippets/svg/drop-shadow/drop-shadow.html) &middot; [demo](https://cdn.rawgit.com/danburzo/snippets/master/snippets/svg/drop-shadow/drop-shadow.html)
 * Line animation: coming soon
+
+## Contributing
+
+You can contribute with:
+
+* ideas for new snippets as [issues](https://github.com/danburzo/snippets/issues);
+* improvements to existing snippets as [issues](https://github.com/danburzo/snippets/issues) (good) or [pull requests](https://github.com/danburzo/snippets/pulls) (excelent).
