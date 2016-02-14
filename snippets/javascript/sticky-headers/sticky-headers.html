@@ -217,7 +217,13 @@
 
 				// Hide all floating headers except the current one
 				headers.forEach(function(header, idx) {
-					header.element.classList.toggle('active', header === current_header);
+					if (header === current_header) {
+						header.element.classList.add('active');	
+					} else {
+						header.element.classList.remove('active');
+					}
+					// P.S. we can't use classList.toggle(className, flag) 
+					// because it's not supported in Internet Explorer
 				});
 
 				if (current_header) {
