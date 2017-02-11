@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		
+	.container {
+		overflow: hidden;
+		transform: translate(0, 0);
+		transition: transform 1s ease-in-out;
+		background: blue;
+	}
+
+	.content {
+		transform: translate(0,0);
+		transition: transform 1s ease-in-out;
+	}
+
+	.content p {
+		margin: 0;
+	}
+
+	.container.collapsed {
+		transform: translate(0, -100%);
+		pointer-events: none;
+	}
+
+	.container.collapsed .content {
+		transform: translate(0, 100%);
+	}
+
+	</style>
+</head>
+<body>
+
+	<button>Toggle</button>
+	<p>Intermediary content</p>
+	<div class='container'>
+		<div class='content'>
+			<p>“As I walk along the stony shore of the pond in my shirt-sleeves, though it is cool as well as cloudy and windy, and I see nothing special to attract me, all the elements are unusually congenial to me.</p>
+
+			<p>“There was a certain positive originality, however slight, to be detected in him, and I occasionally observed that he was thinking for himself and expressing his own opinion, a phenomenon so rare that I would any day walk ten miles to observe it, and it amounted to the re-origination of many of the institutions of society.</p>
+
+			<p>“As I walked in the woods to see the birds and squirrels, so I walked in the village to see the men and boys.</p>
+
+			<p>“Sometimes, after coming home thus late in a dark and muggy night, when my feet felt the path which my eyes could not see, dreaming and absent-minded all the way, until I was aroused by having to raise my hand to lift the latch, I have not been able to recall a single step of my walk, and I have thought that perhaps my body would find its way home if its master should forsake it, as the hand finds its way to the mouth without assistance.</p>
+		</div>
+	</div>
+	<p>Intermediary content</p>
+
+	<script type="text/javascript">
+		var container = document.querySelector('.container');
+		document.querySelector('button').addEventListener('click', function(e) {
+			e.preventDefault();
+			container.classList.toggle('collapsed');
+		});
+	</script>
+</body>
+</html>

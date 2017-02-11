@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+	<title>Flexbox Tabs</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+
+		body {
+			background: #fff;
+			margin: 0;
+			font-family: sans-serif;
+		}
+		
+		.tabs {
+			display: flex;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			background: #ccc;
+			padding: 1em 1em 0;
+			overflow-x: auto;
+		}
+
+		.tabs li {
+			max-width: 14em;
+			min-width: 8em;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+			padding: 0.5em 1em;
+			border: 1px solid #aaa;
+			border-bottom: none;
+			text-align: center;
+			/*margin-right: 1em;*/
+		}
+
+		.tabs a {
+			text-decoration: none;
+			color: inherit;
+		}
+
+		.tabs .selected {
+			background: #fff;
+		}
+
+		.tabs li:not(.selected):hover {
+			background: #bbb;
+		}
+
+	</style>
+</head>
+<body>
+
+
+	<ul class='tabs'>
+		<li><a href='#'>Why bingeing on health foods won’t boost your immune system | Science | The Guardian</a></li>
+		<li class='selected'><a href='#'>Who invented clothes? A Palaeolithic archaeologist answers | Becky Wragg Sykes | Science | The Guardian</a></li>
+		<li><a href='#'>Tiny title</a></li>
+		<li class='new-tab'><a>+</a></li>
+	</ul>
+
+</body>
+</html>
