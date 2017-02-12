@@ -91,6 +91,14 @@
 		}
 
 		/*
+			In situation where we need children to 'float' at opposite directions of the layout,
+			we can use the `justify-content` property to push them to the edges.
+		*/
+		.layout--spread {
+			justify-content: space-between;
+		}
+
+		/*
 			This is the only element we need in a layout block.
 			By default, a `layout__item` does not need to do anything special.
 			It has `flex: 0 1 auto` which is a shorthand for:
@@ -162,13 +170,13 @@
 			padding: 1em 0;
 		}
 
-		nav ul {
+		ul {
 			list-style: none;
 			padding: 0;
 			margin: 0;
 		}
 
-		nav li {
+		li {
 			display: inline-block;
 		}
 
@@ -305,9 +313,21 @@
 
 		<!-- 
 			The footer is a .layout__item of fixed size, with a small-height modifier.
+			As a .layout, it lays out its children horizontally (hbox), 
+			and spreads them to the edges.
 		-->
-		<footer class='layout__item layout__item--fixed-size item-height--small'>
-			Copyright &copy; 2017 Your Company
+		<footer class='layout layout--hbox layout--spread layout__item layout__item--fixed-size item-height--small'>
+			<div class='layout__item'>
+				Copyright &copy; 2017 Your Company
+			</div>
+
+			<div class='layout__item'>
+				<ul>
+					<li><a href="#">About us</a></li>
+					<li><a href="#">Jobs</a></li>
+					<li><a href="#">Terms of Service</a></li>
+				</ul>
+			</div>
 		</footer>
 	</div>
 
