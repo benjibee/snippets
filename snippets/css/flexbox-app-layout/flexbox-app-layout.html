@@ -207,12 +207,30 @@
 		*/
 
 		.layout__item {
-			transition: margin 0.2s;
+			transition: padding 0.2s, margin 0.2s;
 		}
 
 		.exploded .layout__item {
 			background-color: rgba(255,0,0,0.1);
 			margin: 0.5em;
+			position: relative;
+			padding: 1em;
+			outline: 1px solid rgba(255,0,0,0.3);
+		}
+
+		.exploded .layout__item:before {
+			content: attr(class);
+			font-size: 10px;
+			color: #777;
+			background: white;
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: 0.25em 0.5em;
+			font-family: monospace;
+			word-spacing: 0.75em;
+			line-height: 1.5;
+			z-index: 2;
 		}
 	</style>
 </head>
@@ -331,7 +349,7 @@
 			As a .layout, it lays out its children horizontally (hbox), 
 			and spreads them to the edges.
 		-->
-		<footer class='layout layout--hbox layout--spread layout__item layout__item--fixed-size item-height--small'>
+		<footer class='layout layout--hbox layout--spread layout__item layout__item--fixed-size layout__item--height-small'>
 			<div class='layout__item'>
 				Copyright &copy; 2017 Your Company
 			</div>
