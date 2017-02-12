@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Flexbox Layout</title>
 
 	<style type="text/css">
@@ -18,15 +19,16 @@
 		}
 
 		/* 
-			To create a 'full-page' application layout,
-			we need set a 100% height on all parent elements 
-			up to our layout container.
+			The app container takes the full height of the browser window.
+			(100vh = 100% of the viewport's height).
 
-			This allows us to decide how to set the overflow
-			for elements that go beyond the browser window.
+			You can also use the `min-height` property instead
+			if you want to ensure the app is at least
+			as big as the browser window, but not constrain it beyond that.
 		*/
-		html, body, #app {
-			height: 100%;
+
+		#app {
+			height: 100vh;
 		}
 
 		/* 
@@ -152,6 +154,19 @@
 
 		.layout__item--height-small {
 			flex-basis: 3em;
+		}
+
+		/* 
+			In general, you'd want to adjust how the app lays out when viewed
+			on small devices. 
+
+			Below is a minimal example of turning all flex layouts to normal block layouts.
+
+		*/
+		@media (max-width: 40em) {
+			.layout {
+				display: block;
+			}
 		}
 
 		/*
