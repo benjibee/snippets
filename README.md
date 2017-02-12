@@ -12,6 +12,7 @@ Simple HTML, CSS, SVG and JavaScript recipes, thoroughly documented.
 * Delayed :hover effect: [code](https://github.com/danburzo/snippets/blob/master/snippets/css/delayed-hover/delayed-hover.html) &middot; [demo](https://cdn.rawgit.com/danburzo/snippets/master/snippets/css/delayed-hover/delayed-hover.html)
 * Indented hierarchical navigation: [code](https://github.com/danburzo/snippets/blob/master/snippets/css/indented-navigation/indented-navigation.html) &middot; [demo](https://cdn.rawgit.com/danburzo/snippets/master/snippets/css/indented-navigation/indented-navigation.html)
 * Responsive thumbnail gallery with labels: [code](https://github.com/danburzo/snippets/blob/master/snippets/css/thumbnail-gallery/thumbnail-gallery.html) &middot; [demo](https://cdn.rawgit.com/danburzo/snippets/master/snippets/css/thumbnail-gallery/thumbnail-gallery.html)
+* A full-page app layout using Flexbox: [code](https://github.com/danburzo/snippets/blob/master/snippets/css/flexbox-app-layout/flexbox-app-layout.html) &middot; [demo](https://cdn.rawgit.com/danburzo/snippets/master/snippets/css/flexbox-app-layout/flexbox-app-layout.html)
 
 ### JavaScript
 
