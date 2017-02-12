@@ -178,7 +178,19 @@
 			color: #777;
 			text-align: center;
 		}
-		.
+		
+		/* 
+			Let's see the layout building blocks a bit better 
+		*/
+
+		.layout__item {
+			transition: margin 0.2s;
+		}
+
+		.exploded .layout__item {
+			background-color: rgba(255,0,0,0.1);
+			margin: 0.5em;
+		}
 	</style>
 </head>
 <body>
@@ -259,7 +271,7 @@
 
 				<!-- The content header is a .layout__item of fixed size, based on its content -->
 				<div class='layout__item layout__item--fixed-size'>
-					<h2>Content header</h2>
+					<h2><a id='explode' href='#'>Click here to explode layout</a></h2>
 				</div>
 
 				<!-- 
@@ -299,5 +311,13 @@
 		</footer>
 	</div>
 
+	<script type="text/javascript">
+		
+	document.getElementById('explode').addEventListener('click', function(e) {
+		document.documentElement.classList.toggle('exploded');
+		e.preventDefault();
+	})
+
+	</script>
 </body>
 </html>
