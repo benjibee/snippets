@@ -220,15 +220,15 @@
 
 		.exploded .layout__item:before {
 			content: attr(class);
-			font-size: 10px;
+			font-size: 9px;
 			color: #777;
 			background: white;
 			position: absolute;
 			top: 0;
 			left: 0;
 			padding: 0.25em 0.5em;
-			font-family: monospace;
-			word-spacing: 0.75em;
+			font-family: 'Monaco', monospace;
+			word-spacing: 0.5em;
 			line-height: 1.5;
 			z-index: 2;
 		}
@@ -257,7 +257,7 @@
 				with a "medium width" modifier.
 			-->
 			<div class='layout__item layout__item--fixed-size layout__item--width-medium'>
-				Logo
+				Your logo here
 			</div>
 
 			<!--
@@ -266,6 +266,7 @@
 			-->
 			<nav class='layout__item layout__item--grow'>
 				<ul>
+					<li><strong>This is a simple app layout using Flexbox</strong></li>
 					<li><a href="#">Link one</a></li>
 					<li><a href="#">Link two</a></li>
 					<li><a href="#">Link three</a></li>
@@ -277,7 +278,7 @@
 				is fixed to a medium width.
 			-->
 			<div class='layout__item layout__item--fixed-size layout__item--width-medium'>
-				<a href='#'>Log out</a>
+				<a href='#'>Log in</a>
 			</div>
 
 		</header>
@@ -292,14 +293,26 @@
 			
 			<!-- 
 				The left sidebar is a .layout__item of fixed size, with a medium-width modifier.
+
+				As a .layout, it lays its child elements vertically (vbox) and 
+				pushes them towards the top/bottom edges.
 			-->
-			<div class='layout__item layout__item--fixed-size layout__item--width-medium'>
-				<h2>Left sidebar</h2>
-				<ul>
-					<li><a href="#">Category one</a></li>
-					<li><a href="#">Category two</a></li>
-					<li><a href="#">Category three</a></li>
-				</ul>
+			<div class='layout__item layout__item--fixed-size layout__item--width-medium layout layout--vbox layout--spread'>
+
+				<!-- 
+					The top part of the left sidebar is a layout__item of fixed-size
+				-->
+				<div class='layout__item layout__item--fixed-size'>
+					<h2>Left sidebar</h2>
+					<p>May have a top part...</p>
+				</div>
+
+				<!--
+					And so is the bottom part 
+				-->
+				<div class='layout__item layout__item--fixed-size'>
+					<p>...and this bottom part!</p>
+				</div>
 			</div> <!-- / left sidebar -->
 
 			<!--
@@ -351,14 +364,14 @@
 		-->
 		<footer class='layout layout--hbox layout--spread layout__item layout__item--fixed-size layout__item--height-small'>
 			<div class='layout__item'>
-				Copyright &copy; 2017 Your Company
+				A snippet by <a href='http://danburzo.ro'>Dan Burzo</a>
 			</div>
 
 			<div class='layout__item'>
 				<ul>
-					<li><a href="#">About us</a></li>
-					<li><a href="#">Jobs</a></li>
-					<li><a href="#">Terms of Service</a></li>
+					<li><a href="http://danburzo.ro">Website</a></li>
+					<li><a href="https://twitter.com/danburzo">Twitter</a></li>
+					<li><a href="https://github.com/danburzo/snippets">More snippets on GitHub</a></li>
 				</ul>
 			</div>
 		</footer>
