@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>
+		Text + Hanging Illustration
+	</title>
+
+	<style type="text/css">
+		
+	body {
+		margin: 0;
+		padding: 0;
+	}
+
+	figure {
+		margin: 0;
+	}
+
+	figure img {
+		width: 100%;
+		height: auto;
+	}
+
+	/* 
+		Layout
+	*/
+
+	.page {
+		--gutter: 1.5em;
+		--column: 12vw;
+		width: calc(3 * var(--column) + 2 * var(--gutter));
+		margin: 2em auto;
+	}
+
+	.illustration {
+		float: right;
+		width: 66.66%; /* 2/3 of content = two columns of 10em (sort of) */
+		margin-right: -33.33%; /* offset by one column */
+		margin-left: calc(1/3 * var(--gutter));
+		margn-bottom: var(--gutter);
+	}
+
+	.illustration figure {
+		margin-left: calc(2/3 * var(--gutter));
+		margin-right: calc(-1/3 * var(--gutter));
+	}
+
+	.column-guide {
+		background-image: 
+			linear-gradient(
+				to right, 
+				rgba(0,200,255,0.2) 0, 
+				rgba(0,200,255,0.2) var(--column),
+				rgba(0,0,0,0) calc(var(--column) + 1px),
+				rgba(0,0,0,0) 100%
+			);
+		background-size: calc(var(--column) + var(--gutter)) 100%;
+		background-position: left top;
+	}
+
+	.illustration.column-guide {
+		background-position: calc(2/3 * var(--gutter)) top;
+	}
+
+	</style>
+</head>
+<body>
+
+<div class='page column-guide'>
+	
+	<div class='illustration column-guide'>
+		<figure>
+			<img src="http://placehold.it/350x200" />
+			<figcaption style='padding: 3em 0'>Some caption is in order</figcaption>
+		</figure>
+	</div>
+
+	<div class='text'>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer porta iaculis urna vel lacinia. Cras sit amet erat consequat, porttitor enim id, venenatis erat. Nam cursus dictum est, id tristique nunc porta euismod. Etiam ornare ex in congue dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam ex a tincidunt scelerisque. Donec a risus nec justo vestibulum rhoncus. Etiam tincidunt rhoncus tellus, ac volutpat diam rutrum eget. Praesent ultricies eros quis urna suscipit, a rhoncus urna pretium. Nunc luctus accumsan neque id lobortis. Sed viverra eros ac pharetra lacinia. Vestibulum dapibus, mi et lobortis luctus, purus orci posuere lacus, id aliquet nulla lorem eget justo. Pellentesque nisl arcu, scelerisque id euismod rutrum, gravida eu ex. Nam vestibulum lectus leo. Maecenas nec ex tortor.</p>
+
+		<p>Proin fermentum nibh vitae augue mollis pharetra. Proin faucibus orci sit amet orci commodo, eu egestas lectus gravida. Morbi quis quam eu ante rutrum sollicitudin. Sed consequat dolor quis orci pulvinar, ac bibendum odio condimentum. Proin lacus nulla, volutpat vitae faucibus non, ornare et erat. Mauris non augue egestas, finibus elit a, bibendum elit. Integer at dolor tincidunt, dapibus dui vitae, consectetur nisl. Duis dapibus lectus ultrices, maximus purus sed, pellentesque justo. Integer luctus neque at metus tempus auctor. Aenean accumsan nisl aliquet eleifend lobortis. Mauris convallis nisi quis neque molestie, eu vehicula sapien fermentum.</p>
+
+		<p>Pellentesque lobortis tristique arcu non ornare. Fusce laoreet sed ante ac interdum. Aenean rhoncus nisl eget condimentum aliquam. Curabitur lorem ex, ornare sed sem at, feugiat condimentum lectus. Nunc vitae sodales quam. Cras ut felis facilisis, elementum nulla et, sagittis dui. Cras congue varius lectus, nec dictum eros varius sodales. Sed mattis leo ac risus rutrum blandit. Nullam et justo quis massa viverra tincidunt vel ac velit. Fusce congue quis ex et interdum. Nam lobortis id nulla et pulvinar. Maecenas lacinia in erat in suscipit.</p>
+
+		<p>Cras pellentesque metus at neque iaculis hendrerit. Quisque non tincidunt ante, non eleifend libero. Fusce non lacus quam. Integer tincidunt augue lacinia, euismod velit non, aliquet augue. Cras in ultricies dolor, eget gravida nisl. Aenean eget euismod lectus. Quisque ullamcorper, odio vitae viverra fringilla, dui nunc vulputate felis, eu sollicitudin tortor nunc sollicitudin urna. Curabitur sed turpis et tortor dignissim sagittis ac nec eros.</p>
+
+		<p>Vestibulum eget tristique arcu, sit amet fermentum quam. Sed sodales eros metus, non tempus nunc elementum in. Pellentesque a leo orci. Donec elit nulla, tincidunt non dapibus id, eleifend eget risus. Sed maximus, lectus at tincidunt sagittis, nibh ante vestibulum nisl, a tincidunt enim enim a nisi. Suspendisse diam metus, luctus non ipsum et, feugiat dignissim leo. Sed ac congue odio. Donec justo ipsum, congue ut orci et, semper congue quam. Nunc ac mi urna. Aliquam rutrum porttitor enim, vitae posuere dui vulputate quis. Donec lacinia sapien euismod ipsum rhoncus, et eleifend nisl congue. In quis sollicitudin dolor. Nulla auctor gravida mattis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean pharetra consectetur vulputate. </p>
+
+	</div>
+</div>
+
+</body>
+</html>
