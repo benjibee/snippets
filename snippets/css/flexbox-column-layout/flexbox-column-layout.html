@@ -7,9 +7,7 @@
 	<style type="text/css">
 
 	body {
-		margin: 0;
-		padding: 0;
-		--baseline-grid: 1.3rem;
+		--baseline-grid: 1.5rem;
 		line-height: var(--baseline-grid);
 	}
 
@@ -19,7 +17,7 @@
 	}
 
 	.grid .box {
-		padding: var(--grid-gutter);
+		/*padding: calc(var(--grid-gutter)/2);*/
 		margin-bottom: var(--grid-gutter);
 	}
 
@@ -93,12 +91,40 @@
 		------------------------------------------
 	*/
 
+	html {
+		font-size: 16px;
+	}
+
+	body {
+		padding: 2em;
+		font-family: 
+			-apple-system, 
+			BlinkMacSystemFont, 
+			"Segoe UI", 
+			Helvetica, 
+			Arial, 
+			sans-serif, 
+			"Apple Color Emoji", 
+			"Segoe UI Emoji", 
+			"Segoe UI Symbol";
+	}
+
 	.page {
-		max-width: 70em;
+		max-width: 60em;
 		margin: 0 auto;
 	}
 
-	body.show-guides .page {
+	.page, .grid, .col, .box {
+		transition: all 0.2s;
+	}
+
+	h1 {
+		font-size: 2.4em;
+		margin: var(--baseline-grid) 0;
+		line-height: calc(2 * var(--baseline-grid));
+	}
+
+	.page:hover {
 		background-image: 
 			linear-gradient(
 				to bottom, 
@@ -109,35 +135,43 @@
 		background-position: left top;
 	}
 
-	body.show-guides .grid {
+	.page:hover .grid {
 		background: rgba(200,255,0,0.05);
 	}
 
-	body.show-guides [class*='col-'] {
+	.page:hover [class*='col-'] {
 		background: rgba(255,200,0,0.2);
 	}
 
-	body.show-guides .box {
+	.page:hover .box {
 		/*border: 1px solid rgba(255,0,0,0.2);*/
 		background: rgba(255,0,0,0.1);
 	}
 
 	</style>
 </head>
-<body class='show-guides'>
+<body>
 
 	<!-- Let's implement a 5-col layout! -->
 	<div class='page'>
 
+		<div class='grid before-1 after-1'>
+			<div class='col-3'>
+				<div class='box'>
+					<h1>Exploring columns & baseline ryhthm with flexbox in CSS</h1>
+				</div>
+			</div>
+		</div>
+
 		<div class='grid before-2'>
 			<div class='col-1'>
 				<div class='box'>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+					Channeling my inner Josef Müller–Brockmann.
 				</div>
 			</div>
 			<div class='col-1'>
 				<div class='box'>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. 
 				</div>
 			</div>
 			<div class='col-1'>
@@ -147,27 +181,19 @@
 			</div>
 		</div>
 
-		<div class='grid after-2'>
+		<div class='grid before-1 after-1'>
 			<div class='col-1'>
 				<div class='box'>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim.
 				</div class='box'>
 			</div>
 			<div class='col-2'>
 				<div class='box'>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl.
 				</div class='box'>
 			</div>
 		</div>
 
-		<div class='grid before-2 after-2'>
-			<div class='col-1'>
-				<div class='box'>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				</div>
-			</div>
-		</div>
-		
 		<div class='grid' style='font-size: 0.8em'>
 			<div class='col-4'>
 				<div class='grid'>
