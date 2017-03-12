@@ -5,26 +5,17 @@
 	<title>Flexbox column layout</title>
 
 	<style type="text/css">
-	
-	body {
-		margin: 0;
-		padding: 0;
-	}
-
-	.page {
-		/*height: 100vh;*/
-		max-width: 70em;
-		margin: 0 auto;
-	}
 
 	.grid {
-		/*height: 100%;*/
 		display: flex;
+		--grid-gutter: 1rem;
+		margin: var(--grid-gutter) 0;
 	}
 
-	.column {
-		background: rgba(255,0,0,0.1);
+	.grid .grid {
+		margin: 0;
 	}
+
 
 	.column,
 	.space-before:before,
@@ -43,55 +34,74 @@
 
 	.column,
 	.space-before:before {
-		margin-right: 1rem;
+		margin-right: var(--grid-gutter);
 	}
 
 	.grid:not(.space-after) .column:last-child {
 		margin-right: 0;
 	}
 
-	.column--span-2,
-	.space-before--span-2:before,
-	.space-after--span-2:after {
+	.column--2,
+	.space-before--2:before,
+	.space-after--2:after {
 		flex-grow: 2;
-		padding-left: 1rem;
+		padding-left: var(--grid-gutter);
 	}
 
-	.column--span-2 > :first-child {
-		margin-left: -1rem;
+	.column--2 > :first-child {
+		margin-left: calc(-1 * var(--grid-gutter));
 	}
 
-	.column--span-3,
-	.space-before--span-3:before,
-	.space-after--span-3:after {
+	.column--3,
+	.space-before--3:before,
+	.space-after--3:after {
 		flex-grow: 3;
-		padding-left: 2rem;
+		padding-left: calc(2 * var(--grid-gutter));
 	}
 
-	.column--span-3 > :first-child {
-		margin-left: -2rem;
+	.column--3 > :first-child {
+		margin-left: calc(-2 * var(--grid-gutter));
 	}
 
-	.column--span-4,
-	.space-before--span-4:before,
-	.sapce-after--span-4:after {
+	.column--4,
+	.space-before--4:before,
+	.sapce-after--4:after {
 		flex-grow: 4;
-		padding-left: 3rem;
+		padding-left: calc(3 * var(--grid-gutter));
 	}
 
-	.column--span-4 > :first-child {
-		margin-left: -3rem;
+	.column--4 > :first-child {
+		margin-left: calc(-3 * var(--grid-gutter));
 	}
 
-	.column--span-5,
-	.space-before--span-5:before,
-	.space-after--span-5:after {
+	.column--5,
+	.space-before--5:before,
+	.space-after--5:after {
 		flex-grow: 5;
-		padding-left: 4rem;
+		padding-left: calc(4 * var(--grid-gutter));
 	}
 
-	.column--span-5 > :first-child {
-		margin-left: -4rem;
+	.column--5 > :first-child {
+		margin-left: calc(-4 * var(--grid-gutter));
+	}
+
+	/* 
+		Presentational Styles
+		------------------------------------------
+	*/
+
+	body {
+		margin: 0;
+		padding: 0;
+	}
+
+	.page {
+		max-width: 70em;
+		margin: 0 auto;
+	}
+
+	.column {
+		/*background: rgba(255,0,0,0.1);*/
 	}
 
 	</style>
@@ -101,46 +111,54 @@
 	<!-- Let's implement a 5-column layout! -->
 	<div class='page'>
 
-		<div class='grid space-before space-before--span-2'>
+		<div class='grid space-before space-before--2'>
 			<div class='column'>
 				<div>
-					xoxo
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				</div>
 			</div>
 			<div class='column'>
 				<div>
-					xoxo
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				</div>
 			</div>
 			<div class='column'>
 				<div>
-					xoxo
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				</div>
 			</div>
 		</div>
 
-		<div class='grid space-after space-after--span-2'>
+		<div class='grid space-after space-after--2'>
 			<div class='column'>
 				<div>
-					xoxo
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				</div>
 			</div>
-			<div class='column column--span-2'>
+			<div class='column column--2'>
 				<div>
-					xoxo
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+				</div>
+			</div>
+		</div>
+
+		<div class='grid space-after space-after--2 space-before space-before--2'>
+			<div class='column'>
+				<div>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				</div>
 			</div>
 		</div>
 		
 		<div class='grid' style='font-size: 0.8em'>
-			<div class='column column--span-4'>
+			<div class='column column--4'>
 				<div class='grid'>
 					<div class='column'>
 						<div>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet.
 						</div>
 					</div>
-					<div class='column column--span-2'>
+					<div class='column column--2'>
 						<div>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet.
 						</div>
@@ -166,16 +184,16 @@
 				</div>
 			</div>
 
-			<div class='column column--span-4'>
+			<div class='column column--4'>
 				<div class='grid'>
-					<div class='column column--span-3' style='font-size:1.2em;'>
+					<div class='column column--3' style='font-size:1.2em;'>
 						<div class='grid'>
 							<div class='column'>
 								<div>
 									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet. Suspendisse vel urna tristique, euismod nibh quis, consequat risus. Donec laoreet mi sit amet bibendum ornare. Quisque mollis feugiat tortor ut tempus. Aenean at libero fringilla, vestibulum nisl quis, lacinia turpis. Sed blandit nulla eros, sit amet vulputate tortor pulvinar dapibus. Donec fringilla enim a pharetra maximus. Nullam vel nisi sagittis, sollicitudin est et, vehicula turpis. Ut eu porta magna. Curabitur sit amet nunc ipsum.
 								</div>
 							</div>
-							<div class='column column--span-2'>
+							<div class='column column--2'>
 								<div>
 
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim.</p>
