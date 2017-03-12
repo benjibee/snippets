@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Flexbox column layout</title>
+	<title>Flexbox col layout</title>
 
 	<style type="text/css">
 
@@ -16,72 +16,64 @@
 		margin: 0;
 	}
 
-
-	.column,
-	.space-before:before,
-	.space-after:after {
+	.grid [class*='col-'],
+	.grid[class*='before-']:before,
+	.grid[class*='after-']:after {
 		flex: 1;
-	}
-
-	.column {
 		overflow: hidden;
+		content: ''; /* this applies only to :before / :after */
 	}
 
-	.space-before:before,
-	.space-after:after {
-		content: '';
-	}
-
-	.column,
-	.space-before:before {
+	.grid [class*='col-'],
+	.grid[class*='before-']:before {
 		margin-right: var(--grid-gutter);
 	}
 
-	.grid:not(.space-after) .column:last-child {
+	.grid:not([class*='after-']) [class*='col-']:last-child {
 		margin-right: 0;
 	}
 
-	.column--2,
-	.space-before--2:before,
-	.space-after--2:after {
+	.grid .col-2,
+	.grid.before-2:before,
+	.grid.after-2:after {
 		flex-grow: 2;
 		padding-left: var(--grid-gutter);
 	}
 
-	.column--2 > :first-child {
+	.grid .col-2 > :first-child {
 		margin-left: calc(-1 * var(--grid-gutter));
 	}
 
-	.column--3,
-	.space-before--3:before,
-	.space-after--3:after {
+	.grid .col-3,
+	.grid.before-3:before,
+	.grid.after-3:after {
 		flex-grow: 3;
 		padding-left: calc(2 * var(--grid-gutter));
 	}
 
-	.column--3 > :first-child {
+	.grid .col-3 > :first-child {
 		margin-left: calc(-2 * var(--grid-gutter));
 	}
 
-	.column--4,
-	.space-before--4:before,
-	.sapce-after--4:after {
+	.grid .col-4,
+	.grid.before-4:before,
+	.grid.after-4:after {
 		flex-grow: 4;
 		padding-left: calc(3 * var(--grid-gutter));
 	}
 
-	.column--4 > :first-child {
+	.grid .col-4 > :first-child {
 		margin-left: calc(-3 * var(--grid-gutter));
 	}
 
-	.column--5,
-	.space-before--5:before,
-	.space-after--5:after {
+	.grid .col-5,
+	.grid.before-5:before,
+	.grid.after-5:after {
 		flex-grow: 5;
 		padding-left: calc(4 * var(--grid-gutter));
 	}
 
-	.column--5 > :first-child {
+	.grid .col-5 > :first-child {
 		margin-left: calc(-4 * var(--grid-gutter));
 	}
 
@@ -100,7 +92,7 @@
 		margin: 0 auto;
 	}
 
-	.column {
+	.col {
 		/*background: rgba(255,0,0,0.1);*/
 	}
 
@@ -108,42 +100,42 @@
 </head>
 <body>
 
-	<!-- Let's implement a 5-column layout! -->
+	<!-- Let's implement a 5-col layout! -->
 	<div class='page'>
 
-		<div class='grid space-before space-before--2'>
-			<div class='column'>
+		<div class='grid before-2'>
+			<div class='col-1'>
 				<div>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				</div>
 			</div>
-			<div class='column'>
+			<div class='col-1'>
 				<div>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				</div>
 			</div>
-			<div class='column'>
-				<div>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				</div>
-			</div>
-		</div>
-
-		<div class='grid space-after space-after--2'>
-			<div class='column'>
-				<div>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				</div>
-			</div>
-			<div class='column column--2'>
+			<div class='col-1'>
 				<div>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				</div>
 			</div>
 		</div>
 
-		<div class='grid space-after space-after--2 space-before space-before--2'>
-			<div class='column'>
+		<div class='grid after-2'>
+			<div class='col-1'>
+				<div>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+				</div>
+			</div>
+			<div class='col-2'>
+				<div>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+				</div>
+			</div>
+		</div>
+
+		<div class='grid before-2 after-2'>
+			<div class='col-1'>
 				<div>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				</div>
@@ -151,19 +143,19 @@
 		</div>
 		
 		<div class='grid' style='font-size: 0.8em'>
-			<div class='column column--4'>
+			<div class='col-4'>
 				<div class='grid'>
-					<div class='column'>
+					<div class='col-1'>
 						<div>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet.
 						</div>
 					</div>
-					<div class='column column--2'>
+					<div class='col-2'>
 						<div>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet.
 						</div>
 					</div>
-					<div class='column'>
+					<div class='col-1'>
 						<div>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet.
 						</div>
@@ -171,40 +163,40 @@
 				</div>
 
 			</div>
-			<div class='column'>
+			<div class='col-1'>
 				<div>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet.
 				</div>
 			</div>
 		</div>
 		<div class='grid'>
-			<div class='column'>
+			<div class='col-1'>
 				<div>
 				 	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet. Suspendisse vel urna tristique, euismod nibh quis, consequat risus. Donec laoreet mi sit amet bibendum ornare. Quisque mollis feugiat tortor ut tempus. Aenean at libero fringilla, vestibulum nisl quis, lacinia turpis. Sed blandit nulla eros, sit amet vulputate tortor pulvinar dapibus. Donec fringilla enim a pharetra maximus. Nullam vel nisi sagittis, sollicitudin est et, vehicula turpis. Ut eu porta magna. Curabitur sit amet nunc ipsum. 
 				</div>
 			</div>
 
-			<div class='column column--4'>
+			<div class='col-4'>
 				<div class='grid'>
-					<div class='column column--3' style='font-size:1.2em;'>
+					<div class='col-3' style='font-size:1.2em;'>
 						<div class='grid'>
-							<div class='column'>
+							<div class='col-1'>
 								<div>
 									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet. Suspendisse vel urna tristique, euismod nibh quis, consequat risus. Donec laoreet mi sit amet bibendum ornare. Quisque mollis feugiat tortor ut tempus. Aenean at libero fringilla, vestibulum nisl quis, lacinia turpis. Sed blandit nulla eros, sit amet vulputate tortor pulvinar dapibus. Donec fringilla enim a pharetra maximus. Nullam vel nisi sagittis, sollicitudin est et, vehicula turpis. Ut eu porta magna. Curabitur sit amet nunc ipsum.
 								</div>
 							</div>
-							<div class='column column--2'>
+							<div class='col-2'>
 								<div>
 
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim.</p>
 
 									<div class='grid' style='font-size:0.7em;'>
-										<div class='column'>
+										<div class='col-1'>
 											<div>
 												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet. Suspendisse vel urna tristique, euismod nibh quis, consequat risus. Donec laoreet mi sit amet bibendum ornare. Quisque mollis feugiat tortor ut tempus. Aenean at libero fringilla, vestibulum nisl quis, lacinia turpis. Sed blandit nulla eros, sit amet vulputate tortor pulvinar dapibus. Donec fringilla enim a pharetra maximus.
 											</div>
 										</div>
-										<div class='column'>
+										<div class='col-1'>
 											<div>
 												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet. Suspendisse vel urna tristique, euismod nibh quis, consequat risus. Donec laoreet mi sit amet bibendum ornare. Quisque mollis feugiat tortor ut tempus. Aenean at libero fringilla, vestibulum nisl quis, lacinia turpis. Sed blandit nulla eros, sit amet vulputate tortor pulvinar dapibus. Donec fringilla enim a pharetra maximus.
 											</div>
@@ -214,8 +206,8 @@
 							</div>
 						</div>
 					</div>
-					<div class='column'>
-						 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet. Suspendisse vel urna tristique, euismod nibh quis, consequat risus. Donec laoreet mi sit amet bibendum ornare. 
+					<div class='col-1'>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet. Suspendisse vel urna tristique, euismod nibh quis, consequat risus. Donec laoreet mi sit amet bibendum ornare. 
 					</div>
 				</div>
 			</div>
