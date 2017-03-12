@@ -6,14 +6,21 @@
 
 	<style type="text/css">
 
-	.grid {
-		display: flex;
-		--grid-gutter: 1rem;
-		margin: var(--grid-gutter) 0;
+	body {
+		margin: 0;
+		padding: 0;
+		--baseline-grid: 1.3rem;
+		line-height: var(--baseline-grid);
 	}
 
-	.grid .grid {
-		margin: 0;
+	.grid {
+		display: flex;
+		--grid-gutter: var(--baseline-grid);
+	}
+
+	.grid .box {
+		padding: var(--grid-gutter);
+		margin-bottom: var(--grid-gutter);
 	}
 
 	.grid [class*='col-'],
@@ -40,7 +47,8 @@
 		padding-left: var(--grid-gutter);
 	}
 
-	.grid .col-2 > :first-child {
+	.grid .col-2 > .box,
+	.grid .col-2 > .grid {
 		margin-left: calc(-1 * var(--grid-gutter));
 	}
 
@@ -51,7 +59,8 @@
 		padding-left: calc(2 * var(--grid-gutter));
 	}
 
-	.grid .col-3 > :first-child {
+	.grid .col-3 > .box,
+	.grid .col-3 > .grid {
 		margin-left: calc(-2 * var(--grid-gutter));
 	}
 
@@ -62,7 +71,8 @@
 		padding-left: calc(3 * var(--grid-gutter));
 	}
 
-	.grid .col-4 > :first-child {
+	.grid .col-4 > .box,
+	.grid .col-4 > .grid {
 		margin-left: calc(-3 * var(--grid-gutter));
 	}
 
@@ -73,7 +83,8 @@
 		padding-left: calc(4 * var(--grid-gutter));
 	}
 
-	.grid .col-5 > :first-child {
+	.grid .col-5 > .box,
+	.grid .col-5 > .grid {
 		margin-left: calc(-4 * var(--grid-gutter));
 	}
 
@@ -82,40 +93,55 @@
 		------------------------------------------
 	*/
 
-	body {
-		margin: 0;
-		padding: 0;
-	}
-
 	.page {
 		max-width: 70em;
 		margin: 0 auto;
 	}
 
-	.col {
-		/*background: rgba(255,0,0,0.1);*/
+	body.show-guides .page {
+		background-image: 
+			linear-gradient(
+				to bottom, 
+				rgba(0,0,0,0) calc(var(--baseline-grid) - 1px), 
+				rgb(56,255,255) var(--baseline-grid)
+			);
+		background-size: 100% var(--baseline-grid);
+		background-position: left top;
+	}
+
+	body.show-guides .grid {
+		background: rgba(200,255,0,0.05);
+	}
+
+	body.show-guides [class*='col-'] {
+		background: rgba(255,200,0,0.2);
+	}
+
+	body.show-guides .box {
+		/*border: 1px solid rgba(255,0,0,0.2);*/
+		background: rgba(255,0,0,0.1);
 	}
 
 	</style>
 </head>
-<body>
+<body class='show-guides'>
 
 	<!-- Let's implement a 5-col layout! -->
 	<div class='page'>
 
 		<div class='grid before-2'>
 			<div class='col-1'>
-				<div>
+				<div class='box'>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				</div>
 			</div>
 			<div class='col-1'>
-				<div>
+				<div class='box'>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				</div>
 			</div>
 			<div class='col-1'>
-				<div>
+				<div class='box'>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				</div>
 			</div>
@@ -123,20 +149,20 @@
 
 		<div class='grid after-2'>
 			<div class='col-1'>
-				<div>
+				<div class='box'>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				</div>
+				</div class='box'>
 			</div>
 			<div class='col-2'>
-				<div>
+				<div class='box'>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-				</div>
+				</div class='box'>
 			</div>
 		</div>
 
 		<div class='grid before-2 after-2'>
 			<div class='col-1'>
-				<div>
+				<div class='box'>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 				</div>
 			</div>
@@ -146,17 +172,17 @@
 			<div class='col-4'>
 				<div class='grid'>
 					<div class='col-1'>
-						<div>
+						<div class='box'>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet.
 						</div>
 					</div>
 					<div class='col-2'>
-						<div>
+						<div class='box'>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet.
 						</div>
 					</div>
 					<div class='col-1'>
-						<div>
+						<div class='box'>
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet.
 						</div>
 					</div>
@@ -164,14 +190,14 @@
 
 			</div>
 			<div class='col-1'>
-				<div>
+				<div class='box'>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet.
 				</div>
 			</div>
 		</div>
 		<div class='grid'>
 			<div class='col-1'>
-				<div>
+				<div class='box'>
 				 	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet. Suspendisse vel urna tristique, euismod nibh quis, consequat risus. Donec laoreet mi sit amet bibendum ornare. Quisque mollis feugiat tortor ut tempus. Aenean at libero fringilla, vestibulum nisl quis, lacinia turpis. Sed blandit nulla eros, sit amet vulputate tortor pulvinar dapibus. Donec fringilla enim a pharetra maximus. Nullam vel nisi sagittis, sollicitudin est et, vehicula turpis. Ut eu porta magna. Curabitur sit amet nunc ipsum. 
 				</div>
 			</div>
@@ -181,33 +207,35 @@
 					<div class='col-3' style='font-size:1.2em;'>
 						<div class='grid'>
 							<div class='col-1'>
-								<div>
+								<div class='box'>
 									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet. Suspendisse vel urna tristique, euismod nibh quis, consequat risus. Donec laoreet mi sit amet bibendum ornare. Quisque mollis feugiat tortor ut tempus. Aenean at libero fringilla, vestibulum nisl quis, lacinia turpis. Sed blandit nulla eros, sit amet vulputate tortor pulvinar dapibus. Donec fringilla enim a pharetra maximus. Nullam vel nisi sagittis, sollicitudin est et, vehicula turpis. Ut eu porta magna. Curabitur sit amet nunc ipsum.
 								</div>
 							</div>
 							<div class='col-2'>
-								<div>
-
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim.</p>
+									<div class='box'>
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim.
+									</div>
 
 									<div class='grid' style='font-size:0.7em;'>
 										<div class='col-1'>
-											<div>
+											<div class='box'>
 												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet. Suspendisse vel urna tristique, euismod nibh quis, consequat risus. Donec laoreet mi sit amet bibendum ornare. Quisque mollis feugiat tortor ut tempus. Aenean at libero fringilla, vestibulum nisl quis, lacinia turpis. Sed blandit nulla eros, sit amet vulputate tortor pulvinar dapibus. Donec fringilla enim a pharetra maximus.
 											</div>
 										</div>
 										<div class='col-1'>
-											<div>
+											<div class='box'>
 												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet. Suspendisse vel urna tristique, euismod nibh quis, consequat risus. Donec laoreet mi sit amet bibendum ornare. Quisque mollis feugiat tortor ut tempus. Aenean at libero fringilla, vestibulum nisl quis, lacinia turpis. Sed blandit nulla eros, sit amet vulputate tortor pulvinar dapibus. Donec fringilla enim a pharetra maximus.
 											</div>
 										</div>
 									</div>
-								</div>
+								<!-- </div> -->
 							</div>
 						</div>
 					</div>
 					<div class='col-1'>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet. Suspendisse vel urna tristique, euismod nibh quis, consequat risus. Donec laoreet mi sit amet bibendum ornare. 
+						<div class='box'>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque iaculis euismod nisl a dignissim. Integer velit risus, malesuada vel augue ut, vulputate tincidunt nisl. Donec rutrum viverra nisi euismod porta. Suspendisse eleifend mauris magna, eget pellentesque tellus finibus sit amet. Suspendisse vel urna tristique, euismod nibh quis, consequat risus. Donec laoreet mi sit amet bibendum ornare. 
+						</div>
 					</div>
 				</div>
 			</div>
